@@ -43,3 +43,7 @@ La bozza resta salvata sul dispositivo in cui la stai scrivendo.
 - Stesso marchio e stessa logica (foto + posizione + dashboard).
 - Il Comune vede tutti gli eventi del paese in un unico elenco; in futuro nella stessa dashboard delle segnalazioni.
 - Possibile fonte di ricavi: spazi sponsor per le attività locali sulla mappa dell'evento.
+
+## App installabile (PWA)
+Il sito si installa come un'app: su Android compare "Installa l'app" (o menu ⋮ → Installa app), su iPhone Safari → Condividi → "Aggiungi alla schermata Home". File coinvolti: `manifest.webmanifest`, `sw.js`, icone `icon-*.png` e `apple-touch-icon.png`. Funziona su GitHub Pages (serve HTTPS, già incluso).
+Quando cambi i file del sito, aumenta il numero in `sw.js` (`radar-eventi-v1` → `v2`) così i telefoni scaricano la versione nuova.

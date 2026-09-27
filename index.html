@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Radar Eventi</title>
 <meta name="theme-color" content="#0A0F14">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Radar Eventi">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
@@ -18,6 +25,11 @@
     <h1>Dove andiamo oggi?</h1>
     <span class="muted">Feste, sagre e mercati con mappa, programma e indicazioni per arrivare.</span>
   </header>
+  <section class="card" id="installBox" hidden>
+    <h3>Installa Radar Eventi</h3>
+    <span class="small" id="installText">Aggiungila alla schermata Home: si apre come un'app, anche con poca rete.</span>
+    <button class="btn" id="installBtn" style="align-self:flex-start" hidden>Installa l'app</button>
+  </section>
   <section>
     <h2>Oggi e prossimamente</h2>
     <ul class="list" id="upcoming"><li style="padding:14px" class="muted">Caricamento…</li></ul>
@@ -41,6 +53,16 @@
 <script src="common.js"></script>
 <script>
 document.getElementById("top").innerHTML = topbar("index");
+/* Invito a installare l'app */
+(function(){
+  const box = document.getElementById("installBox"), btn = document.getElementById("installBtn"), txt = document.getElementById("installText");
+  const standalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone;
+  if (standalone) return;
+  let deferred = null;
+  window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); deferred = e; box.hidden = false; btn.hidden = false; });
+  btn.addEventListener("click", async () => { if (!deferred) return; deferred.prompt(); await deferred.userChoice; deferred = null; box.hidden = true; });
+  if (/iphone|ipad|ipod/i.test(navigator.userAgent)) { box.hidden = false; txt.textContent = "Su iPhone: tocca il tasto Condividi di Safari e poi \"Aggiungi alla schermata Home\"."; }
+})();
 function item(e, status){
   const pill = status === "oggi" ? '<span class="pill live">Oggi</span>' : status === "futuro" ? '<span class="pill next">In arrivo</span>' : '<span class="pill">Finito</span>';
   return `<li><a href="evento.html?id=${encodeURIComponent(e.id)}" style="display:flex;flex-direction:column;gap:4px;padding:14px;text-decoration:none;color:inherit">
