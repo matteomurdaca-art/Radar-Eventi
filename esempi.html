@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0A0F14">
+<meta property="og:title" content="Radar Eventi · Inviti di prova">
+<meta property="og:description" content="Compleanni, feste, matrimoni: invito, conferme, chi porta cosa e data nel calendario, da mandare su WhatsApp.">
+<style>[hidden]{display:none!important} :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<title>Radar Eventi · Inviti di prova</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+:root{
+  --bg:#F3F7F9; --surface:#FFFFFF; --ink:#0D1A21; --muted:#5B6E77; --line:#D5E0E5;
+  --glow:#00B8CC; --brand:#007C8C; --brand-ink:#FFFFFF;
+  --accent:#6F7F4F; --accent-soft:#EEF1E6; --accent-ink:#FFFFFF;
+  --yes:#1F7A4D; --no:#B3261E; --maybe:#B7791F; --wait:#8A98A0;
+  --note-bg:#FFF4D6; --note-ink:#6B4E00;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0A0F14; --surface:#111A22; --ink:#E6F1F5; --muted:#8FA3AD; --line:#243440;
+    --glow:#00E5FF; --brand:#00E5FF; --brand-ink:#04141A;
+    --accent:#B9C98F; --accent-soft:#1C2419; --accent-ink:#141A0E;
+    --yes:#6FD39C; --no:#FF8A7A; --maybe:#F2C261; --wait:#7D8D95;
+    --note-bg:#33290C; --note-ink:#F3D98A;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0A0F14; --surface:#111A22; --ink:#E6F1F5; --muted:#8FA3AD; --line:#243440;
+  --glow:#00E5FF; --brand:#00E5FF; --brand-ink:#04141A;
+  --accent:#B9C98F; --accent-soft:#1C2419; --accent-ink:#141A0E;
+  --yes:#6FD39C; --no:#FF8A7A; --maybe:#F2C261; --wait:#7D8D95;
+  --note-bg:#33290C; --note-ink:#F3D98A;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.5;margin:0}
+h1,h2,h3{font-family:"Sora","Atkinson Hyperlegible",system-ui,sans-serif;margin:0;line-height:1.15;text-wrap:balance}
+h1{font-size:2rem;font-weight:800;letter-spacing:-.01em}
+h2{font-size:1.15rem;font-weight:800}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.wrap{max-width:680px;margin:0 auto;padding-inline:16px;padding-block:0 48px;display:flex;flex-direction:column;gap:20px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-block:12px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px}
+.brand svg{width:30px;height:30px}
+.brand b{font-family:"Sora",system-ui,sans-serif;letter-spacing:.14em;font-size:.95rem}
+.brand span{display:block;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--brand);font-weight:700}
+.evpick{flex-direction:row;align-items:center;gap:8px}
+.evpick select{width:auto;min-width:210px;font-weight:700;background:var(--surface)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--surface);gap:2px}
+.seg button{border:0;background:transparent;border-radius:999px;padding:6px 12px;cursor:pointer;font-size:.9rem}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.note{background:var(--note-bg);color:var(--note-ink);border-radius:10px;padding:10px 12px;font-size:.88rem}
+.hero{background:var(--accent-soft);border-radius:18px;padding:22px 18px;display:flex;flex-direction:column;gap:8px;border:1px solid var(--line)}
+.eyebrow{font-size:.74rem;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:700}
+.hero .when{font-weight:700;font-size:1.05rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--accent);color:var(--accent-ink);text-decoration:none;border-radius:10px;padding:10px 14px;font-weight:700;border:0;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.btn.sm{padding:6px 10px;font-size:.86rem}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.small{font-size:.86rem;color:var(--muted)}
+.timeline{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.timeline li{display:grid;grid-template-columns:58px 1fr;gap:10px;padding:10px 0;border-top:1px solid var(--line)}
+.timeline li:first-child{border-top:0}
+.timeline time{font-weight:700;font-variant-numeric:tabular-nums;color:var(--accent)}
+.place{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line)}
+.place:first-of-type{border-top:0}
+.pin{width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-weight:800;flex:none;font-family:"Sora",system-ui,sans-serif}
+.rsvp{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.rsvp button{border:2px solid var(--line);background:var(--surface);border-radius:12px;padding:12px 6px;cursor:pointer;font-weight:700}
+.rsvp button[aria-pressed="true"][data-v="si"]{border-color:var(--yes);color:var(--yes)}
+.rsvp button[aria-pressed="true"][data-v="no"]{border-color:var(--no);color:var(--no)}
+.rsvp button[aria-pressed="true"][data-v="forse"]{border-color:var(--maybe);color:var(--maybe)}
+label{font-size:.88rem;font-weight:700;display:flex;flex-direction:column;gap:4px}
+input[type=text],input[type=number],select,textarea{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-weight:400;width:100%}
+textarea{min-height:64px;resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:480px){.grid2{grid-template-columns:1fr}}
+.ok{color:var(--yes);font-weight:700}
+.bring{list-style:none;margin:0;padding:0}
+.bring li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line)}
+.bring li:first-child{border-top:0}
+.who{font-size:.85rem;color:var(--muted)}
+.wa{background:var(--bg);border:1px dashed var(--line);border-radius:10px;padding:12px;white-space:pre-wrap;font-size:.92rem}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media (max-width:480px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px;display:flex;flex-direction:column}
+.stat b{font-family:"Sora",system-ui,sans-serif;font-size:1.5rem;font-variant-numeric:tabular-nums}
+.bar{display:flex;height:12px;border-radius:999px;overflow:hidden;background:var(--line)}
+.bar span{display:block;height:100%}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{text-align:left;padding:8px 6px;border-top:1px solid var(--line);vertical-align:top}
+th{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.tbl{overflow-x:auto}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+footer{font-size:.82rem;color:var(--muted)}
+</style>
+
+</head>
+<body>
+<main class="wrap">
+  <div class="top">
+    <div class="brand">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="var(--glow)" stroke-width="2" opacity=".35"/><circle cx="20" cy="20" r="12" fill="none" stroke="var(--glow)" stroke-width="2" opacity=".6"/><circle cx="20" cy="20" r="6" fill="none" stroke="var(--glow)" stroke-width="2"/><path d="M20 20 L34 9" stroke="var(--glow)" stroke-width="2.5" stroke-linecap="round"/><circle cx="20" cy="20" r="2.4" fill="var(--glow)"/></svg>
+      <div><b>RADAR</b><span>Eventi · inviti</span></div>
+    </div>
+    <label for="evSel" class="evpick">Evento
+      <select id="evSel"></select>
+    </label>
+  </div>
+
+  <div class="row" style="justify-content:space-between">
+    <div class="seg" role="group" aria-label="Chi sta guardando">
+      <button id="v-guest" data-view="guest" aria-pressed="true">Vista invitato</button>
+      <button id="v-org" data-view="org" aria-pressed="false">Vista organizzatore</button>
+    </div>
+  </div>
+  <div class="note"><strong>Esempio dimostrativo.</strong> Nomi, luoghi e risposte sono inventati. Le risposte che dai qui restano su questo telefono; nella versione vera arrivano all'organizzatore.</div>
+
+  <div id="app"></div>
+
+  <footer>Radar Eventi · un modulo della famiglia RADAR. "Portami qui" apre Google Maps; "Aggiungi al calendario" apre Google Calendar con l'evento già compilato.</footer>
+</main>
+
+<script>
+/* Modelli di evento per Radar Eventi (dati di esempio, inventati) */
+const TEMPLATES = {
+  compleanno: {
+    label:"Festa di compleanno", kind:"Compleanno", title:"Leo compie 7 anni!",
+    tagline:"Giochi, caccia al tesoro e torta. Vi aspettiamo!",
+    dateLabel:"Sabato 17 ottobre 2026", timeLabel:"16:00–18:30",
+    cal:{text:"Festa di compleanno di Leo (7 anni)", start:"20261017T160000", end:"20261017T183000",
+      location:"Oratorio di Vigliano, Via Chiesa 8, Vigliano Biellese", details:"Ritiro dei bambini alle 18:30."},
+    places:[{n:"1", name:"Oratorio di Vigliano", addr:"Via Chiesa 8, Vigliano Biellese", what:"Sala feste e cortile · luogo di esempio", lat:45.5636737, lon:8.1099976}],
+    program:[["16:00","Arrivo e giochi in cortile"],["16:45","Caccia al tesoro"],["17:30","Merenda e torta"],["18:30","Ritiro dei bambini"]],
+    extras:[["Lasciare i bambini","Si possono lasciare e riprendere alle 18:30. Chi vuole resta per un caffè."],["Se piove","La festa si fa nella sala al coperto."]],
+    rsvpBy:"entro il 10 ottobre", namePh:"Nome del bambino", countLabel:"Adulti che restano", countMin:0, kidAllergy:true,
+    bring:[{item:"Bibite (2 bottiglie grandi)", need:2, who:["Mamma di Sara"]},{item:"Patatine e salatini", need:1, who:[]},{item:"Succhi di frutta", need:2, who:["Papà di Tommaso","Nonna di Emma"]},{item:"Piatti e bicchieri", need:1, who:[]},{item:"Pizzette", need:1, who:[]}],
+    helpers:[{task:"Sistemare la sala", when:"15:30–16:00", need:2, who:["Papà di Tommaso"]},{task:"Aiuto alla caccia al tesoro", when:"16:45–17:30", need:1, who:[]}],
+    wa:"Ciao! Leo compie 7 anni e fa la festa sabato 17 ottobre, 16:00–18:30, all'oratorio. Qui trovi luogo e programma, puoi dirci se venite e scegliere cosa portare:\n[link dell'invito]",
+    org:{invited:20, yes:14, no:2, maybe:1, line:"14 bambini confermati · 6 adulti restano alla festa", foodTitle:"Allergie e intolleranze", food:[["Senza glutine",1],["Senza lattosio",1]], countHead:"Bambini",
+      people:[["Sara","si",1,"Senza glutine"],["Tommaso","si",1,""],["Emma","si",1,""],["Giacomo","forse",1,""],["Alice","no",0,""],["Pietro","",0,""]]},
+    style:{accent:"#D9480F", soft:"#FFF0E6", accentDark:"#FF9F6B", softDark:"#2A1A10", font:"baloo", deco:"confetti", card:"#FFE8D6", ink:"#3A1606"}
+  },
+  natale: {
+    label:"Festa di Natale", kind:"Festa di Natale", title:"Cena degli auguri",
+    tagline:"Una serata insieme prima delle feste, con tombola e scambio di regali.",
+    dateLabel:"Sabato 19 dicembre 2026", timeLabel:"dalle 19:30",
+    cal:{text:"Cena degli auguri di Natale", start:"20261219T193000", end:"20261219T235900",
+      location:"Via Roma 10, Vigliano Biellese", details:"Aperitivo, cena, tombola e scambio di regali (budget 10 €)."},
+    places:[{n:"1", name:"Casa di Anna e Paolo", addr:"Via Roma 10, Vigliano Biellese", what:"Indirizzo di esempio · citofono Rossi"}],
+    program:[["19:30","Aperitivo"],["20:30","Cena"],["22:00","Tombola"],["23:00","Scambio dei regali"]],
+    extras:[["Scambio regali","Budget 10 €. Il nome della persona a cui fai il regalo ti arriva in privato."],["Parcheggio","In piazza, a 2 minuti a piedi."]],
+    rsvpBy:"entro il 12 dicembre", namePh:"Il tuo nome", countLabel:"Quante persone", countMin:1, food:true,
+    bring:[{item:"Panettone o pandoro", need:2, who:["Luca"]},{item:"Vino rosso", need:2, who:[]},{item:"Spumante", need:2, who:["Giulia"]},{item:"Cartelle e premi per la tombola", need:1, who:[]}],
+    wa:"Ciao! Il 19 dicembre facciamo la cena degli auguri a casa nostra, dalle 19:30. Tombola e scambio di regali (budget 10 €). Qui trovi tutto e puoi confermare:\n[link dell'invito]",
+    org:{invited:16, yes:11, no:2, maybe:1, line:"11 confermati · 4 hanno già scelto cosa portare", foodTitle:"Esigenze alimentari", food:[["Vegetariano",2]], countHead:"Persone",
+      people:[["Luca e Sara","si",2,""],["Giulia","si",1,"Vegetariana"],["Marco","forse",1,""],["Elena","no",0,""],["Davide","",0,""]]},
+    style:{accent:"#B42318", soft:"#FDECEA", accentDark:"#FF8A7A", softDark:"#2A1311", font:"fraunces", deco:"stars", card:"#123D2E", ink:"#FFF6E8", gold:"#E9C46A"}
+  },
+  capodanno: {
+    label:"Cena di Capodanno", kind:"Cena di Capodanno", title:"Aspettiamo il 2027 insieme",
+    tagline:"Cena, brindisi a mezzanotte e musica fino a tardi.",
+    dateLabel:"Giovedì 31 dicembre 2026", timeLabel:"dalle 20:30",
+    cal:{text:"Cena di Capodanno", start:"20261231T203000", end:"20270101T020000",
+      location:"Via Milano 50, Vigliano Biellese", details:"Cena, brindisi a mezzanotte, musica. Quota spesa 25 € a persona."},
+    places:[{n:"1", name:"Casa di Marta", addr:"Via Milano 50, Vigliano Biellese", what:"Indirizzo di esempio · secondo piano"}],
+    program:[["20:30","Aperitivo"],["21:00","Cena"],["23:45","Tutti fuori per il conto alla rovescia"],["00:00","Brindisi"],["00:30","Musica"]],
+    extras:[["Quota spesa","25 € a persona per cena e bevande, da dare a Marta entro il 28 dicembre."],["Dormire","Chi viene da lontano può fermarsi: indicalo nella risposta."]],
+    rsvpBy:"entro il 20 dicembre", namePh:"Il tuo nome", countLabel:"Quante persone", countMin:1, food:true,
+    bring:[{item:"Spumante per il brindisi", need:3, who:["Andrea"]},{item:"Lenticchie e cotechino", need:1, who:["Marta"]},{item:"Dolci", need:2, who:[]}],
+    wa:"Ciao! Capodanno da Marta: cena, brindisi a mezzanotte e musica. Quota spesa 25 € a persona. Qui trovi tutto e puoi confermare:\n[link dell'invito]",
+    org:{invited:14, yes:9, no:1, maybe:2, line:"9 confermati · 3 si fermano a dormire · quote ricevute 5 su 9", foodTitle:"Esigenze alimentari", food:[["Senza glutine",1],["Vegano",1]], countHead:"Persone",
+      people:[["Andrea","si",1,""],["Chiara e Luca","si",2,"1 senza glutine"],["Federica","forse",1,""],["Simone","no",0,""],["Irene","",0,""]]},
+    style:{accent:"#8A6D1F", soft:"#F7F0DD", accentDark:"#E9C46A", softDark:"#221C0C", font:"fraunces", deco:"sparkle", card:"#101826", ink:"#F4EAD0", gold:"#E9C46A"}
+  },
+  pigiama: {
+    label:"Pigiama party", kind:"Pigiama party", title:"Pigiama party da Sofia",
+    tagline:"Film, pizza, giochi e colazione tutti insieme!",
+    dateLabel:"Venerdì 6 novembre 2026", timeLabel:"dalle 19:00 a sabato alle 10:00",
+    cal:{text:"Pigiama party da Sofia", start:"20261106T190000", end:"20261107T100000",
+      location:"Via Garibaldi 5, Vigliano Biellese", details:"Ritiro sabato alle 10:00 dopo colazione."},
+    places:[{n:"1", name:"Casa di Sofia", addr:"Via Garibaldi 5, Vigliano Biellese", what:"Indirizzo di esempio"}],
+    program:[["19:00","Arrivo e giochi"],["20:00","Pizza"],["21:00","Film"],["22:30","Tutti nei sacchi a pelo"],["08:30","Colazione"],["10:00","Ritiro"]],
+    extras:[["Nello zaino","Pigiama, sacco a pelo, cuscino, spazzolino, un peluche se serve per dormire."],["Per i genitori","Sofia ha 9 anni; in casa ci sono sempre mamma e papà. Per qualsiasi cosa, il numero è nel messaggio WhatsApp."]],
+    rsvpBy:"entro il 2 novembre", namePh:"Nome della bambina o del bambino", countLabel:"Bambini", countMin:1, kidAllergy:true,
+    checklist:["Pigiama","Sacco a pelo","Cuscino","Spazzolino e dentifricio","Ciabatte"],
+    wa:"Ciao! Sofia fa il pigiama party venerdì 6 novembre dalle 19:00, ritiro sabato alle 10:00 dopo colazione. Qui trovi cosa mettere nello zaino e puoi confermare:\n[link dell'invito]",
+    org:{invited:6, yes:4, no:1, maybe:0, line:"4 bambine e bambini confermati · 5 posti letto disponibili", foodTitle:"Allergie e intolleranze", food:[["Frutta secca",1]], countHead:"Bambini",
+      people:[["Giorgia","si",1,"Frutta secca"],["Martina","si",1,""],["Bianca","si",1,""],["Nina","si",1,""],["Ada","no",0,""],["Lucia","",0,""]]},
+    style:{accent:"#5B4BC4", soft:"#EFEDFB", accentDark:"#AFA4FF", softDark:"#1A1730", font:"baloo", deco:"moon", card:"#231E4A", ink:"#F2EFFF", gold:"#FFD66B"}
+  },
+  matrimonio: {
+    label:"Matrimonio", kind:"Matrimonio", title:"Giulia & Marco",
+    tagline:"Ci sposiamo! Saremmo felici di averti con noi.",
+    dateLabel:"Sabato 12 giugno 2027", timeLabel:"dalle 15:30",
+    cal:{text:"Matrimonio di Giulia & Marco", start:"20270612T153000", end:"20270613T010000",
+      location:"Chiesa di San Michele, Via S. Michele 7, Vigliano Biellese", details:"Cerimonia alle 15:30, poi ricevimento al Castello di Montecavallo."},
+    places:[{n:"1", name:"Chiesa di San Michele", addr:"Via S. Michele 7, Vigliano Biellese", what:"Cerimonia alle 15:30", lat:45.5633867, lon:8.0992319},
+            {n:"2", name:"Castello di Montecavallo", addr:"Via per Chiavazza 30, Vigliano Biellese", what:"Ricevimento dalle 17:30 · location di esempio", lat:45.5688893, lon:8.1002096}],
+    program:[["15:30","Cerimonia in chiesa"],["17:00","Trasferimento al castello"],["17:30","Aperitivo in terrazza"],["20:00","Cena"],["22:30","Torta e musica"]],
+    extras:[["Dress code","Elegante, scarpe comode: al castello si cammina sulla ghiaia."],["Alloggi","10 camere bloccate nei B&B vicini: indicalo nella risposta."],["Bambini","Area giochi con animatrice durante la cena."]],
+    rsvpBy:"entro il 15 aprile 2027", namePh:"Il tuo nome", countLabel:"Quante persone", countMin:1, food:true,
+    wa:"Ciao! Giulia e Marco si sposano sabato 12 giugno 2027. Luoghi, programma e alloggi sono qui, e puoi confermare in un tocco:\n[link dell'invito]",
+    org:{invited:120, yes:64, no:9, maybe:7, line:"14 persone chiedono un alloggio nei B&B convenzionati", foodTitle:"Esigenze alimentari", food:[["Vegetariano",6],["Senza glutine",3],["Menù bambini",8]], countHead:"Persone",
+      people:[["Famiglia Bianchi","si",4,"1 senza glutine"],["Luca R.","si",1,""],["Zia Carla","forse",2,""],["Paolo e Anna","no",0,""],["Famiglia Rossi","si",3,"2 menù bambini"],["Chiara M.","",0,""]]},
+    style:{accent:"#6F7F4F", soft:"#EEF1E6", accentDark:"#B9C98F", softDark:"#1C2419", font:"fraunces", deco:"rings", card:"#F4F1E8", ink:"#2E3524", gold:"#B08D57"}
+  },
+  grigliata: {
+    label:"Grigliata in giardino", kind:"Grigliata", title:"Grigliata di primavera",
+    tagline:"Brace accesa, prato e tanta compagnia.",
+    dateLabel:"Domenica 18 aprile 2027", timeLabel:"dalle 12:30",
+    cal:{text:"Grigliata di primavera", start:"20270418T123000", end:"20270418T180000",
+      location:"Via dei Prati 3, Vigliano Biellese", details:"Ognuno porta qualcosa: scegli nel link dell'invito."},
+    places:[{n:"1", name:"Giardino di Stefano", addr:"Via dei Prati 3, Vigliano Biellese", what:"Indirizzo di esempio · ingresso dal cancello verde"}],
+    program:[["12:30","Aperitivo in giardino"],["13:00","Si accende la brace"],["14:00","Pranzo"],["16:00","Calcetto e giochi"]],
+    extras:[["Se piove","Si sposta sotto il portico."],["Bambini","Prato recintato, portate un pallone."]],
+    rsvpBy:"entro il 14 aprile", namePh:"Il tuo nome", countLabel:"Quante persone", countMin:1, food:true,
+    bring:[{item:"Salsicce e costine", need:3, who:["Stefano"]},{item:"Verdure da grigliare", need:2, who:[]},{item:"Bibite e birra", need:3, who:["Paolo"]},{item:"Dolce", need:2, who:[]},{item:"Carbonella", need:1, who:[]}],
+    wa:"Ciao! Domenica 18 aprile grigliata in giardino da Stefano, dalle 12:30. Ognuno porta qualcosa: scegli tu cosa, qui, e dicci se ci sei:\n[link dell'invito]",
+    org:{invited:18, yes:12, no:3, maybe:2, line:"12 confermati · 3 cose da portare ancora libere", foodTitle:"Esigenze alimentari", food:[["Vegetariano",3]], countHead:"Persone",
+      people:[["Paolo e Laura","si",2,""],["Famiglia Conti","si",4,"1 vegetariano"],["Riccardo","forse",1,""],["Serena","no",0,""],["Matteo B.","",0,""]]},
+    style:{accent:"#2F7D32", soft:"#E8F3E8", accentDark:"#8FD694", softDark:"#142A15", font:"baloo", deco:"leaves", card:"#EAF5DF", ink:"#1E3A12"}
+  },
+  laurea: {
+    label:"Festa di laurea", kind:"Festa di laurea", title:"Chiara è dottoressa!",
+    tagline:"Festeggiamo la laurea in Ingegneria con una cena e brindisi.",
+    dateLabel:"Venerdì 12 marzo 2027", timeLabel:"dalle 20:00",
+    cal:{text:"Festa di laurea di Chiara", start:"20270312T200000", end:"20270313T010000",
+      location:"Sala feste, Via Milano 80, Vigliano Biellese", details:"Cena, brindisi e musica."},
+    places:[{n:"1", name:"Sala feste", addr:"Via Milano 80, Vigliano Biellese", what:"Luogo di esempio"}],
+    program:[["20:00","Aperitivo"],["20:45","Cena"],["22:30","Discorso e brindisi"],["23:00","Musica"]],
+    extras:[["Regalo","Chi vuole partecipa al regalo comune: indicalo nella risposta."],["Parcheggio","Ampio parcheggio davanti alla sala."]],
+    rsvpBy:"entro il 5 marzo", namePh:"Il tuo nome", countLabel:"Quante persone", countMin:1, food:true,
+    wa:"Ciao! Chiara si è laureata e festeggiamo venerdì 12 marzo dalle 20:00. Qui trovi luogo e programma, e puoi confermare:\n[link dell'invito]",
+    org:{invited:40, yes:28, no:4, maybe:3, line:"28 confermati · 19 partecipano al regalo comune", foodTitle:"Esigenze alimentari", food:[["Vegetariano",4],["Senza lattosio",1]], countHead:"Persone",
+      people:[["Compagni di corso","si",8,"2 vegetariani"],["Zio Franco","si",2,""],["Alessia","forse",1,""],["Nicola","no",0,""],["Famiglia Ferri","",0,""]]},
+    style:{accent:"#9B1C31", soft:"#FBEAEC", accentDark:"#FF8FA3", softDark:"#2A1116", font:"fraunces", deco:"cap", card:"#7A1426", ink:"#FFF3F0", gold:"#F2C14E"}
+  },
+  comunione: {
+    label:"Prima comunione", kind:"Prima comunione", title:"La prima comunione di Luca",
+    tagline:"Una giornata speciale da condividere con chi gli vuole bene.",
+    dateLabel:"Domenica 16 maggio 2027", timeLabel:"dalle 10:30",
+    cal:{text:"Prima comunione di Luca", start:"20270516T103000", end:"20270516T170000",
+      location:"Parrocchia S. Maria Assunta, Via Chiesa 8, Vigliano Biellese", details:"Messa alle 10:30, poi pranzo."},
+    places:[{n:"1", name:"Parrocchia S. Maria Assunta", addr:"Via Chiesa 8, Vigliano Biellese", what:"Messa alle 10:30", lat:45.5636737, lon:8.1099976},
+            {n:"2", name:"Ristorante", addr:"Vigliano Biellese", what:"Pranzo dalle 12:30 · luogo di esempio"}],
+    program:[["10:30","Messa"],["12:00","Foto sul sagrato"],["12:30","Pranzo"],["15:00","Torta"]],
+    extras:[["Bambini","Menù bambini e un tavolo con giochi durante il pranzo."]],
+    rsvpBy:"entro il 30 aprile", namePh:"Il tuo nome", countLabel:"Quante persone", countMin:1, food:true,
+    wa:"Ciao! Domenica 16 maggio Luca fa la prima comunione: messa alle 10:30 e poi pranzo insieme. Qui trovi luoghi e programma, e puoi confermare:\n[link dell'invito]",
+    org:{invited:45, yes:31, no:5, maybe:2, line:"31 confermati · 9 menù bambini", foodTitle:"Esigenze alimentari", food:[["Menù bambini",9],["Senza glutine",1]], countHead:"Persone",
+      people:[["Nonni Rossi","si",2,""],["Zia Paola","si",3,"2 menù bambini"],["Famiglia Galli","forse",4,""],["Padrino Marco","si",1,""],["Cugini Neri","",0,""]]},
+    style:{accent:"#2B6CB0", soft:"#EAF2FB", accentDark:"#90C2F5", softDark:"#11202F", font:"fraunces", deco:"dove", card:"#EEF5FC", ink:"#16324F", gold:"#C9A227"}
+  }
+};
+
+
+let cur = "compleanno", view = "guest";
+const answers = {};
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const calLink = c => "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent(c.text) + "&dates=" + c.start + "/" + c.end + "&details=" + encodeURIComponent(c.details) + "&location=" + encodeURIComponent(c.location) + "&ctz=Europe/Rome";
+const mapsLink = p => "https://www.google.com/maps/dir/?api=1&destination=" + (p.lat ? p.lat + "," + p.lon : encodeURIComponent(p.addr));
+
+function isDark(){
+  const t = document.documentElement.getAttribute("data-theme");
+  return t === "dark" || (t !== "light" && matchMedia("(prefers-color-scheme: dark)").matches);
+}
+function applyStyle(){
+  const st = TEMPLATES[cur].style, d = isDark(), r = document.documentElement.style;
+  r.setProperty("--accent", d ? st.accentDark : st.accent);
+  r.setProperty("--accent-soft", d ? st.softDark : st.soft);
+  r.setProperty("--accent-ink", d ? "#111" : "#FFFFFF");
+}
+
+function listSection(title, sub, items, key, btn, done){
+  return `<section class="card"><h2>${title}</h2><span class="small">${sub}</span><ul class="bring">${items.map((b, i) => {
+    const left = b.need - b.who.length;
+    return `<li><div><strong>${esc(b.item || b.task)}</strong>${b.when ? ` <span class="small">${esc(b.when)}</span>` : ""}<div class="who">${b.who.length ? esc(b.who.join(", ")) : "Nessuno ancora"}${left > 0 && b.task ? ` · serve${left > 1 ? "no" : ""} ancora ${left}` : ""}</div></div>
+      ${left > 0 ? `<button class="btn sm ghost" data-${key}="${i}">${btn}</button>` : `<span class="ok">${done}</span>`}</li>`;
+  }).join("")}</ul></section>`;
+}
+
+function guest(){
+  const t = TEMPLATES[cur], a = answers[cur];
+  return `
+  <section class="hero">
+    <span class="eyebrow">${esc(t.kind)}</span>
+    <h1>${esc(t.title)}</h1>
+    <span>${esc(t.tagline)}</span>
+    <span class="when">${esc(t.dateLabel)} · ${esc(t.timeLabel)}</span>
+    <div class="row"><a class="btn" href="${calLink(t.cal)}" target="_blank" rel="noopener">Aggiungi a Google Calendar</a></div>
+  </section>
+
+  <section class="card">
+    <h2>Ci sarai?</h2>
+    <span class="small">Rispondi ${esc(t.rsvpBy)}.</span>
+    <div class="rsvp" role="group" aria-label="Risposta">
+      ${[["si","Sì, ci sarò"],["forse","Forse"],["no","Non posso"]].map(([v, l]) => `<button data-v="${v}" aria-pressed="${a?.v === v}">${l}</button>`).join("")}
+    </div>
+    <div id="rsvpMore" ${a && a.v !== "no" ? "" : "hidden"} style="display:flex;flex-direction:column;gap:10px">
+      <div class="grid2">
+        <label for="r-name">Nome<input type="text" id="r-name" value="${esc(a?.name || "")}" placeholder="${esc(t.namePh)}"></label>
+        <label for="r-n">${esc(t.countLabel)}<input type="number" id="r-n" min="${t.countMin}" max="12" value="${a?.n ?? t.countMin}"></label>
+      </div>
+      ${t.food ? `<label for="r-food">Esigenze alimentari<select id="r-food"><option>Nessuna</option><option>Vegetariano</option><option>Vegano</option><option>Senza glutine</option><option>Senza lattosio</option><option>Menù bambini</option><option>Altro (scrivilo nella nota)</option></select></label>` : ""}
+      ${t.kidAllergy ? `<label for="r-food">Allergie o intolleranze<input type="text" id="r-food" placeholder="Es. frutta secca" value="${esc(a?.food || "")}"></label><span class="small">La vede solo chi organizza.</span>` : ""}
+      <label for="r-note">Nota per chi organizza (facoltativa)<textarea id="r-note">${esc(a?.note || "")}</textarea></label>
+    </div>
+    <div class="row"><button class="btn" id="send">Invia risposta</button><span id="sent" class="ok" aria-live="polite">${a?.sent ? "Risposta registrata. Puoi cambiarla quando vuoi." : ""}</span></div>
+  </section>
+
+  <section class="card">
+    <h2>Dove</h2>
+    ${t.places.map(p => `<div class="place"><span class="pin">${p.n}</span><div style="flex:1"><strong>${esc(p.name)}</strong><div class="small">${esc(p.addr)}</div><div>${esc(p.what)}</div>
+      <a class="btn sm" style="margin-top:6px" href="${mapsLink(p)}" target="_blank" rel="noopener">Portami qui</a></div></div>`).join("")}
+  </section>
+
+  <section class="card">
+    <h2>Programma</h2>
+    <ul class="timeline">${t.program.map(([h, w]) => `<li><time>${h}</time><span>${esc(w)}</span></li>`).join("")}</ul>
+  </section>
+
+  ${t.checklist ? `<section class="card"><h2>Nello zaino</h2><ul class="bring">${t.checklist.map((c, i) => `<li><label class="check" for="ck${i}" style="flex-direction:row;align-items:center;gap:10px;font-weight:400"><input type="checkbox" id="ck${i}"> ${esc(c)}</label></li>`).join("")}</ul></section>` : ""}
+  ${t.bring ? listSection("Chi porta cosa", "Scegli una cosa: gli altri vedono che è già presa.", t.bring, "bring", "La porto io", "Completo") : ""}
+  ${t.helpers ? listSection("Serve una mano", "Piccoli turni per chi si ferma.", t.helpers, "help", "Ci sono", "Coperto") : ""}
+
+  <section class="card">
+    <h2>Da sapere</h2>
+    ${t.extras.map(([k, v]) => `<div><strong>${esc(k)}</strong><div class="small">${esc(v)}</div></div>`).join("")}
+  </section>`;
+}
+
+function org(){
+  const t = TEMPLATES[cur], o = t.org, wait = o.invited - o.yes - o.no - o.maybe;
+  const pct = n => (n / o.invited * 100).toFixed(1) + "%";
+  const labels = {si:["Sì","--yes"], no:["No","--no"], forse:["Forse","--maybe"], "":["In attesa","--wait"]};
+  return `
+  <section class="hero">
+    <span class="eyebrow">Pannello di chi organizza</span>
+    <h1>${esc(t.title)}</h1>
+    <span class="when">${esc(t.dateLabel)} · ${o.invited} invitati</span>
+  </section>
+
+  <section class="card">
+    <h2>Risposte</h2>
+    <div class="stats">
+      <div class="stat"><span class="small">Sì</span><b style="color:var(--yes)">${o.yes}</b></div>
+      <div class="stat"><span class="small">Forse</span><b style="color:var(--maybe)">${o.maybe}</b></div>
+      <div class="stat"><span class="small">No</span><b style="color:var(--no)">${o.no}</b></div>
+      <div class="stat"><span class="small">In attesa</span><b style="color:var(--wait)">${wait}</b></div>
+    </div>
+    <div class="bar" role="img" aria-label="${o.yes} sì, ${o.maybe} forse, ${o.no} no, ${wait} in attesa su ${o.invited}">
+      <span style="width:${pct(o.yes)};background:var(--yes)"></span><span style="width:${pct(o.maybe)};background:var(--maybe)"></span><span style="width:${pct(o.no)};background:var(--no)"></span><span style="width:${pct(wait)};background:var(--wait)"></span>
+    </div>
+    <span class="small">${esc(o.line)}</span>
+  </section>
+
+  <section class="card">
+    <h2>${esc(o.foodTitle)}</h2>
+    ${o.food.map(([k, n]) => `<div class="row" style="justify-content:space-between"><span>${esc(k)}</span><strong style="font-variant-numeric:tabular-nums">${n}</strong></div>`).join("")}
+  </section>
+
+  <section class="card">
+    <h2>Invitati</h2>
+    <div class="tbl"><table><thead><tr><th>Nome</th><th>Risposta</th><th>${esc(o.countHead)}</th><th>Note</th></tr></thead><tbody>
+      ${o.people.map(([n, r, c, x]) => `<tr><td>${esc(n)}</td><td><span class="dot" style="background:var(${labels[r][1]})"></span>${labels[r][0]}</td><td style="font-variant-numeric:tabular-nums">${r === "si" || r === "forse" ? c : "—"}</td><td>${esc(x)}</td></tr>`).join("")}
+    </tbody></table></div>
+    <span class="small">Esempio con alcuni invitati; la lista completa si importa dai contatti o si incolla.</span>
+  </section>
+
+  ${t.bring ? `<section class="card"><h2>Chi porta cosa</h2>${t.bring.map(b => `<div class="row" style="justify-content:space-between"><span>${esc(b.item)}</span><span class="${b.who.length >= b.need ? "ok" : "small"}">${b.who.length}/${b.need}</span></div>`).join("")}</section>` : ""}
+
+  <section class="card">
+    <h2>Invia su WhatsApp</h2>
+    <span class="small">Il messaggio con il link, pronto per il gruppo o per i singoli invitati. Puoi allegare anche l'invito in immagine.</span>
+    <div class="wa" id="waText">${esc(t.wa)}</div>
+    <div class="row">
+      <button class="btn" id="copyWa">Copia messaggio</button>
+      <a class="btn ghost" href="https://wa.me/?text=${encodeURIComponent(t.wa)}" target="_blank" rel="noopener">Apri WhatsApp</a>
+      <span id="copied" class="small" aria-live="polite"></span>
+    </div>
+    <button class="btn ghost sm" id="remind" style="align-self:flex-start">Prepara promemoria per i ${wait} che non hanno risposto</button>
+  </section>
+
+  <section class="card">
+    <h2>Data nel calendario</h2>
+    <span class="small">Gli invitati hanno lo stesso tasto nella loro pagina, e il QR dell'invito in immagine apre lo stesso evento.</span>
+    <a class="btn" href="${calLink(t.cal)}" target="_blank" rel="noopener" style="align-self:flex-start">Aggiungi a Google Calendar</a>
+  </section>`;
+}
+
+function render(){
+  applyStyle();
+  document.getElementById("evSel").value = cur;
+  document.querySelectorAll("[data-view]").forEach(b => b.setAttribute("aria-pressed", b.dataset.view === view));
+  const app = document.getElementById("app");
+  app.innerHTML = view === "guest" ? guest() : org();
+  app.style.cssText = "display:flex;flex-direction:column;gap:20px";
+  wire();
+}
+
+function copyText(txt, el, msgEl){
+  const fallback = () => { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); msgEl.textContent = "Testo selezionato: copialo dal menu del telefono."; };
+  try{ navigator.clipboard.writeText(txt).then(() => { msgEl.textContent = "Copiato."; }, fallback); }catch(e){ fallback(); }
+}
+
+function wire(){
+  const t = TEMPLATES[cur];
+  document.querySelectorAll(".rsvp button").forEach(b => b.addEventListener("click", () => {
+    answers[cur] = {...(answers[cur] || {}), v: b.dataset.v, sent: false};
+    document.querySelectorAll(".rsvp button").forEach(x => x.setAttribute("aria-pressed", x === b));
+    document.getElementById("rsvpMore").hidden = b.dataset.v === "no";
+    document.getElementById("sent").textContent = "";
+  }));
+  const send = document.getElementById("send");
+  if(send) send.addEventListener("click", () => {
+    const a = answers[cur], out = document.getElementById("sent");
+    if(!a){ out.className = "small"; out.textContent = "Scegli prima Sì, Forse o Non posso."; return; }
+    a.name = document.getElementById("r-name")?.value || ""; a.n = +(document.getElementById("r-n")?.value || 0);
+    a.food = document.getElementById("r-food")?.value || ""; a.note = document.getElementById("r-note")?.value || ""; a.sent = true;
+    out.className = "ok"; out.textContent = a.v === "no" ? "Grazie per averlo detto. Ci mancherai!" : "Risposta registrata. Puoi cambiarla quando vuoi.";
+  });
+  document.querySelectorAll("[data-bring]").forEach(b => b.addEventListener("click", () => { t.bring[+b.dataset.bring].who.push("Tu"); render(); }));
+  document.querySelectorAll("[data-help]").forEach(b => b.addEventListener("click", () => { t.helpers[+b.dataset.help].who.push("Tu"); render(); }));
+  const cw = document.getElementById("copyWa");
+  if(cw) cw.addEventListener("click", () => copyText(document.getElementById("waText").textContent, document.getElementById("waText"), document.getElementById("copied")));
+  const rm = document.getElementById("remind");
+  if(rm) rm.addEventListener("click", () => {
+    document.getElementById("waText").textContent = `Ciao! Ci dici se ci sarai a "${t.title}" (${t.dateLabel})? Basta un tocco qui: [link dell'invito]`;
+    document.getElementById("copied").textContent = "Promemoria pronto qui sopra: copialo o apri WhatsApp.";
+  });
+}
+
+const sel = document.getElementById("evSel");
+sel.innerHTML = Object.entries(TEMPLATES).map(([k, t]) => `<option value="${k}">${esc(t.label)}</option>`).join("");
+sel.addEventListener("change", () => { cur = sel.value; render(); });
+document.querySelectorAll("[data-view]").forEach(b => b.addEventListener("click", () => { view = b.dataset.view; render(); }));
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyStyle);
+new MutationObserver(applyStyle).observe(document.documentElement, {attributes: true, attributeFilter: ["data-theme"]});
+render();
+
+</script>
+
+</body>
+</html>
