@@ -10,15 +10,17 @@ Prima prova sul campo: **Market della Vendemmia, Castello di Montecavallo (Vigli
 | `index.html` | Elenco degli eventi del paese (oggi, in arrivo, passati) |
 | `evento.html?id=...` | Pagina pubblica di un evento: mappa OpenStreetMap, "Dove sono" con GPS, cosa c'è adesso, programma, aggiornamenti dal posto con foto, contatti, sponsor, QR code |
 | `admin.html` | Pannello organizzatori: dati evento, punti sulla mappa (tocca per aggiungere, trascina per spostare, "Aggiungi dove sono"), programma, aggiornamenti con foto, anteprima, scarica il file evento |
-| `data/events.json` | Elenco degli eventi |
-| `data/events/*.json` | Un file per evento |
-| `css/`, `js/` | Stile e codice condivisi |
+| `events.json` | Elenco degli eventi |
+| `montecavallo-vendemmia-2026.json` | File dell'evento di prova (un file per evento) |
+| `style.css`, `common.js`, `evento.js`, `admin.js` | Stile e codice |
+
+Tutti i file stanno allo stesso livello, senza cartelle: così si caricano anche dal telefono.
 
 Nessuna installazione, nessun server: sono file statici, come Radar V2.
 
 ## Pubblicare su GitHub Pages
 1. Su GitHub crea un repository nuovo, per esempio `Radar-Eventi` (account `matteomurdaca-art`).
-2. Carica tutto il contenuto di questa cartella (Add file → Upload files), mantenendo le sottocartelle.
+2. Add file → Upload files → seleziona **tutti i 10 file** insieme → Commit changes.
 3. Settings → Pages → Branch `main`, cartella `/ (root)` → Save.
 4. Dopo un paio di minuti il sito è su `https://matteomurdaca-art.github.io/Radar-Eventi/`.
 5. Link diretto all'evento di prova: `…/Radar-Eventi/evento.html?id=montecavallo-vendemmia-2026`
@@ -26,8 +28,8 @@ Nessuna installazione, nessun server: sono file statici, come Radar V2.
 ## Aggiungere o modificare un evento (versione 1)
 1. Apri `admin.html`, scegli l'evento o creane uno nuovo.
 2. Compila, metti i punti sulla mappa, controlla con **Anteprima**.
-3. **Scarica file evento** → caricalo nella cartella `data/events/` del repository.
-4. Se l'evento è nuovo, copia la riga proposta in fondo al pannello dentro `data/events.json`.
+3. **Scarica file evento** → caricalo nel repository accanto agli altri file.
+4. Se l'evento è nuovo, copia la riga proposta in fondo al pannello dentro `events.json`.
 
 La bozza resta salvata sul dispositivo in cui la stai scrivendo.
 

@@ -29,7 +29,7 @@ function save(){
 /* ---------- avvio ---------- */
 async function init(){
   try{
-    INDEX = await loadJSON("data/events.json");
+    INDEX = await loadJSON("events.json");
     INDEX.events.forEach(e => $("pick").insertAdjacentHTML("beforeend", `<option value="${esc(e.id)}">${esc(e.title)} · ${esc(e.date)}</option>`));
   }catch(e){ $("draftInfo").textContent = "Elenco eventi non disponibile."; }
   let draft = null;
@@ -185,7 +185,7 @@ $("updList").addEventListener("click", e => { const d = e.target.closest("[data-
 
 /* ---------- pubblicazione ---------- */
 function entry(){
-  return {id: ev.id || slug(ev.title), title: ev.title, date: ev.date, place: ev.place, summary: ev.summary, file: `data/events/${ev.id || slug(ev.title)}.json`};
+  return {id: ev.id || slug(ev.title), title: ev.title, date: ev.date, place: ev.place, summary: ev.summary, file: `${ev.id || slug(ev.title)}.json`};
 }
 function drawEntry(){ if(ev) $("entryOut").value = JSON.stringify(entry(), null, 2); }
 $("copyEntry").addEventListener("click", () => {

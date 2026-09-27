@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="style.css">
 <style>
 .editrow{padding:12px 14px;display:flex;flex-direction:column;gap:8px}
 .editrow .head{display:flex;gap:10px;align-items:center;justify-content:space-between}
@@ -103,7 +103,7 @@
 
     <section class="card">
       <h2>Pubblica</h2>
-      <span class="hint">In questa prima versione il sito legge i file dalla cartella <code>data</code>. Scarica il file dell'evento, caricalo in <code>data/events/</code> e aggiungi la riga qui sotto a <code>data/events.json</code>. Con il database (prossima versione) la pubblicazione sarà immediata.</span>
+      <span class="hint">In questa prima versione il sito legge i file evento dal repository. Scarica il file dell'evento, caricalo nel repository accanto agli altri file e aggiungi la riga qui sotto a <code>events.json</code>. Con il database (prossima versione) la pubblicazione sarà immediata.</span>
       <label for="entryOut">Riga per events.json<textarea id="entryOut" readonly style="font-family:ui-monospace,monospace;font-size:.82rem;min-height:120px"></textarea></label>
       <div class="row"><button class="btn ghost small-btn" id="copyEntry">Copia la riga</button><span class="hint" id="pubMsg" aria-live="polite"></span></div>
     </section>
@@ -117,7 +117,7 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="js/common.js"></script>
-<script src="js/admin.js"></script>
+<script src="common.js"></script>
+<script src="admin.js"></script>
 </body>
 </html>

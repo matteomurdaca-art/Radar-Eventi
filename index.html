@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div id="top"></div>
@@ -33,7 +33,7 @@
   </section>
   <footer><span>Radar Eventi · un modulo della famiglia RADAR</span></footer>
 </main>
-<script src="js/common.js"></script>
+<script src="common.js"></script>
 <script>
 document.getElementById("top").innerHTML = topbar("index");
 function item(e, status){
@@ -43,7 +43,7 @@ function item(e, status){
     <strong style="font-size:1.08rem">${esc(e.title)}</strong>
     <span class="small">${esc(e.place)}${e.summary ? " · " + esc(e.summary) : ""}</span></a></li>`;
 }
-loadJSON("data/events.json").then(idx => {
+loadJSON("events.json").then(idx => {
   if(idx.comune) document.getElementById("comune").textContent = "Eventi a " + idx.comune;
   const t = new Date();
   const withStatus = idx.events.map(e => ({e, s: eventStatus(e, t)})).sort((a,b) => a.e.date.localeCompare(b.e.date));

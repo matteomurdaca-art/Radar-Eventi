@@ -11,7 +11,7 @@ async function getEvent(){
     try{ const d = localStorage.getItem("radar-eventi-bozza"); if(d) return JSON.parse(d); }catch(e){}
     throw new Error("Nessuna bozza da mostrare. Aprila dal pannello organizzatori.");
   }
-  const index = await loadJSON("data/events.json");
+  const index = await loadJSON("events.json");
   const entry = index.events.find(e => e.id === eventId) || (!eventId && index.events[0]);
   if(!entry) throw new Error("Evento non trovato. Controlla il link o torna all'elenco degli eventi.");
   return loadJSON(entry.file);
