@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pannello organizzatori · Radar Eventi</title>
+<meta name="theme-color" content="#0A0F14">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.editrow{padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.editrow .head{display:flex;gap:10px;align-items:center;justify-content:space-between}
+.check{flex-direction:row;align-items:center;gap:8px;font-weight:400}
+.stickybar{position:sticky;bottom:0;background:var(--bg);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));display:flex;gap:8px;flex-wrap:wrap;justify-content:center;z-index:1000}
+.saved{font-size:.82rem;color:var(--ok);align-self:center}
+.thumb{max-width:160px;border-radius:8px}
+.hint{font-size:.86rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<div id="top"></div>
+<main class="wrap">
+  <header style="display:flex;flex-direction:column;gap:6px;padding-top:18px">
+    <span class="eyebrow">Pannello organizzatori</span>
+    <h1>Prepara la mappa del tuo evento</h1>
+    <span class="muted">Compila i dati, tocca la mappa per aggiungere i punti, trascinali per spostarli. La bozza si salva da sola su questo dispositivo.</span>
+  </header>
+
+  <section class="card">
+    <h2>Da dove parti?</h2>
+    <div class="grid2">
+      <label for="pick">Evento esistente
+        <select id="pick"><option value="">— scegli —</option></select>
+      </label>
+      <label for="importFile">Oppure importa un file evento (.json)
+        <input type="file" id="importFile" accept="application/json,.json">
+      </label>
+    </div>
+    <div class="row">
+      <button class="btn ghost small-btn" id="newEv">Nuovo evento vuoto</button>
+      <span class="hint" id="draftInfo"></span>
+    </div>
+  </section>
+
+  <div id="editor" hidden style="display:flex;flex-direction:column;gap:22px">
+    <section class="card">
+      <h2>Dati dell'evento</h2>
+      <label for="f-title">Nome<input type="text" id="f-title" data-k="title"></label>
+      <div class="grid2">
+        <label for="f-date">Data inizio<input type="date" id="f-date" data-k="date"></label>
+        <label for="f-dateEnd">Data fine<input type="date" id="f-dateEnd" data-k="dateEnd"></label>
+      </div>
+      <div class="grid2">
+        <label for="f-place">Luogo<input type="text" id="f-place" data-k="place"></label>
+        <label for="f-address">Indirizzo<input type="text" id="f-address" data-k="address"></label>
+      </div>
+      <label for="f-organizer">Organizzatore<input type="text" id="f-organizer" data-k="organizer"></label>
+      <label for="f-summary">Descrizione breve<textarea id="f-summary" data-k="summary"></textarea></label>
+      <label for="f-facts">Informazioni in evidenza (una per riga)<textarea id="f-facts" data-k="facts" data-lines></textarea></label>
+      <label for="f-notice">Avviso in alto (facoltativo)<textarea id="f-notice" data-k="notice"></textarea></label>
+    </section>
+
+    <section class="card">
+      <h2>Punti sulla mappa</h2>
+      <span class="hint">Tocca la mappa per aggiungere un punto. Tieni premuto e trascina un segnaposto per spostarlo.</span>
+      <div id="amap" class="map"></div>
+      <div class="row">
+        <button class="btn small-btn" id="addHere">📍 Aggiungi dove sono</button>
+        <button class="btn ghost small-btn" id="setCenter">Usa questa vista come vista iniziale</button>
+        <span class="hint" id="mapMsg" aria-live="polite"></span>
+      </div>
+      <ul class="list" id="pointList"></ul>
+    </section>
+
+    <section class="card">
+      <h2>Programma</h2>
+      <ul class="list" id="progList"></ul>
+      <button class="btn ghost small-btn" id="addProg" style="align-self:flex-start">+ Aggiungi attività</button>
+    </section>
+
+    <section class="card">
+      <h2>Aggiornamenti dal posto</h2>
+      <span class="hint">Durante la festa: una frase e una foto, e chi arriva sa cosa trova.</span>
+      <label for="u-text">Cosa succede<textarea id="u-text" placeholder="Es. Il pranzo è pronto sotto la tettoia, c'è posto ai tavoli a destra"></textarea></label>
+      <div class="grid2">
+        <label for="u-point">Riferito al punto<select id="u-point"></select></label>
+        <label for="u-photo">Foto (facoltativa)<input type="file" id="u-photo" accept="image/*"></label>
+      </div>
+      <span class="hint">Evita foto in cui si riconoscono persone, soprattutto bambini.</span>
+      <button class="btn small-btn" id="addUpd" style="align-self:flex-start">Pubblica aggiornamento</button>
+      <ul class="list feed" id="updList"></ul>
+    </section>
+
+    <section class="card">
+      <h2>Contatti, sponsor e cose da completare</h2>
+      <label for="f-contacts">Contatti (una riga per contatto: etichetta | valore)<textarea id="f-contacts"></textarea></label>
+      <label for="f-sponsors">Sponsor (una riga per sponsor: nome | descrizione)<textarea id="f-sponsors"></textarea></label>
+      <label for="f-todo">Informazioni ancora in arrivo (una per riga)<textarea id="f-todo" data-k="todo" data-lines></textarea></label>
+    </section>
+
+    <section class="card">
+      <h2>Pubblica</h2>
+      <span class="hint">In questa prima versione il sito legge i file dalla cartella <code>data</code>. Scarica il file dell'evento, caricalo in <code>data/events/</code> e aggiungi la riga qui sotto a <code>data/events.json</code>. Con il database (prossima versione) la pubblicazione sarà immediata.</span>
+      <label for="entryOut">Riga per events.json<textarea id="entryOut" readonly style="font-family:ui-monospace,monospace;font-size:.82rem;min-height:120px"></textarea></label>
+      <div class="row"><button class="btn ghost small-btn" id="copyEntry">Copia la riga</button><span class="hint" id="pubMsg" aria-live="polite"></span></div>
+    </section>
+  </div>
+</main>
+
+<div class="stickybar" id="bar" hidden>
+  <a class="btn small-btn" href="evento.html?preview" target="_blank" rel="noopener">Anteprima</a>
+  <button class="btn small-btn ghost" id="download">Scarica file evento</button>
+  <span class="saved" id="saved"></span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="js/common.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

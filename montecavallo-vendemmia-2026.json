@@ -1,0 +1,136 @@
+{
+  "id": "montecavallo-vendemmia-2026",
+  "title": "Market della Vendemmia",
+  "date": "2026-09-27",
+  "dateEnd": "2026-09-27",
+  "place": "Castello di Montecavallo",
+  "address": "Via per Chiavazza 30, Vigliano Biellese (BI)",
+  "organizer": "Castello di Montecavallo e Manididonne",
+  "summary": "Una giornata al castello tra artigianato, vino e musica, dalla colazione alla sera.",
+  "facts": [
+    "Tutto il giorno",
+    "Ingresso gratuito",
+    "Con maltempo: rinviato in primavera"
+  ],
+  "notice": "Prova di Radar Eventi. Programma dal sito del castello; le posizioni dentro la tenuta sono indicative e vanno sistemate dall'organizzatore.",
+  "center": [
+    45.56885,
+    8.1001
+  ],
+  "zoom": 18,
+  "points": [
+    {
+      "id": "castello",
+      "cat": "evento",
+      "label": "1",
+      "name": "Castello di Montecavallo",
+      "lat": 45.5688893,
+      "lon": 8.1002096,
+      "desc": "Sede dell'evento. Visite guidate alle cantine con degustazione.",
+      "approx": false
+    },
+    {
+      "id": "viale",
+      "cat": "ingresso",
+      "name": "Viale alberato e arco in mattoni",
+      "lat": 45.56845,
+      "lon": 8.10005,
+      "desc": "Viale in ghiaia con acciottolato al centro, sale verso l'arco. Passano anche le auto degli espositori.",
+      "approx": true
+    },
+    {
+      "id": "market",
+      "cat": "evento",
+      "label": "M",
+      "name": "Market delle creative (Manididonne)",
+      "lat": 45.56862,
+      "lon": 8.09978,
+      "desc": "Artigianato e laboratori. Dal viale segui il cartello con la freccia a sinistra, verso il gonfiabile rosa.",
+      "approx": true
+    },
+    {
+      "id": "terrazza",
+      "cat": "cibo",
+      "name": "Terrazza: food truck e tavolini",
+      "lat": 45.56905,
+      "lon": 8.10045,
+      "desc": "Piazzale in ghiaia con balaustra panoramica. Food truck arancione (caffè e panini), gazebo e tavolini gialli.",
+      "approx": true
+    }
+  ],
+  "program": [
+    {
+      "what": "Market delle creative di Manididonne",
+      "desc": "Artigianato e laboratori",
+      "allDay": true,
+      "point": "market"
+    },
+    {
+      "what": "Food truck",
+      "desc": "Caffè e panini sulla terrazza",
+      "whenText": "Colazione → merenda",
+      "point": "terrazza"
+    },
+    {
+      "what": "Degustazioni",
+      "desc": "I vini di Castello di Montecavallo",
+      "whenText": "Durante la giornata",
+      "point": "castello"
+    },
+    {
+      "what": "Visite guidate alle cantine",
+      "desc": "Con degustazione",
+      "whenText": "Orario non pubblicato",
+      "unknown": true,
+      "point": "castello"
+    },
+    {
+      "what": "Pilates nel parco",
+      "desc": "Lezione all'aperto",
+      "whenText": "Orario non pubblicato",
+      "unknown": true
+    },
+    {
+      "what": "DJ set",
+      "desc": "Musica fino a sera",
+      "whenText": "Fino a sera"
+    }
+  ],
+  "updates": [
+    {
+      "time": "11:08",
+      "text": "Dal viale d'ingresso: cartello con freccia a sinistra verso il market, dove c'è il gonfiabile rosa. Attenzione alle auto degli espositori sul viale.",
+      "point": "viale"
+    },
+    {
+      "time": "11:05",
+      "text": "Sulla terrazza: food truck arancione in fondo contro la balaustra, gazebo bianco a sinistra, tavolini gialli a destra.",
+      "point": "terrazza"
+    }
+  ],
+  "todo": [
+    "Dove parcheggiare e se c'è una navetta",
+    "Conferma della zona del market",
+    "Ingresso delle cantine e bagni",
+    "Orari di visite guidate, pilates e DJ set"
+  ],
+  "contacts": [
+    {
+      "label": "Castello di Montecavallo",
+      "value": "+39 389 932 6879"
+    },
+    {
+      "label": "Email castello",
+      "value": "info@castellodimontecavallo.it"
+    },
+    {
+      "label": "Manididonne (market)",
+      "value": "manididonne@gmail.com"
+    }
+  ],
+  "sponsors": [],
+  "source": {
+    "label": "Castello di Montecavallo, pagina Eventi",
+    "url": "https://castellodimontecavallo.it/pages/eventi"
+  }
+}

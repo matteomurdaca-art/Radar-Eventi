@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Radar Eventi</title>
+<meta name="theme-color" content="#0A0F14">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="top"></div>
+<main class="wrap">
+  <header style="display:flex;flex-direction:column;gap:6px;padding-top:18px">
+    <span class="eyebrow" id="comune">Eventi del paese</span>
+    <h1>Dove andiamo oggi?</h1>
+    <span class="muted">Feste, sagre e mercati con mappa, programma e indicazioni per arrivare.</span>
+  </header>
+  <section>
+    <h2>Oggi e prossimamente</h2>
+    <ul class="list" id="upcoming"><li style="padding:14px" class="muted">Caricamento…</li></ul>
+  </section>
+  <section id="pastWrap" hidden>
+    <h2>Eventi passati</h2>
+    <ul class="list" id="past"></ul>
+  </section>
+  <section class="card">
+    <h3>Organizzi un evento?</h3>
+    <span class="small">Con il pannello organizzatori metti sulla mappa stand, parcheggi e servizi in pochi minuti e ottieni il QR code da stampare.</span>
+    <a class="btn" href="admin.html" style="align-self:flex-start">Apri il pannello</a>
+  </section>
+  <footer><span>Radar Eventi · un modulo della famiglia RADAR</span></footer>
+</main>
+<script src="js/common.js"></script>
+<script>
+document.getElementById("top").innerHTML = topbar("index");
+function item(e, status){
+  const pill = status === "oggi" ? '<span class="pill live">Oggi</span>' : status === "futuro" ? '<span class="pill next">In arrivo</span>' : '<span class="pill">Finito</span>';
+  return `<li><a href="evento.html?id=${encodeURIComponent(e.id)}" style="display:flex;flex-direction:column;gap:4px;padding:14px;text-decoration:none;color:inherit">
+    <span class="row">${pill}<span class="small">${esc(dateRange(e))}</span></span>
+    <strong style="font-size:1.08rem">${esc(e.title)}</strong>
+    <span class="small">${esc(e.place)}${e.summary ? " · " + esc(e.summary) : ""}</span></a></li>`;
+}
+loadJSON("data/events.json").then(idx => {
+  if(idx.comune) document.getElementById("comune").textContent = "Eventi a " + idx.comune;
+  const t = new Date();
+  const withStatus = idx.events.map(e => ({e, s: eventStatus(e, t)})).sort((a,b) => a.e.date.localeCompare(b.e.date));
+  const up = withStatus.filter(x => x.s !== "passato"), past = withStatus.filter(x => x.s === "passato").reverse();
+  document.getElementById("upcoming").innerHTML = up.length ? up.map(x => item(x.e, x.s)).join("") : '<li style="padding:14px" class="muted">Nessun evento in programma per ora.</li>';
+  if(past.length){ document.getElementById("pastWrap").hidden = false; document.getElementById("past").innerHTML = past.map(x => item(x.e, x.s)).join(""); }
+}).catch(() => { document.getElementById("upcoming").innerHTML = '<li style="padding:14px">Elenco eventi non disponibile. Riprova tra poco.</li>'; });
+</script>
+</body>
+</html>
