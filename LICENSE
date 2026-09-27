@@ -1,0 +1,48 @@
+RADAR EVENTI — LICENZA PROPRIETARIA / PROPRIETARY LICENSE
+
+Copyright (c) 2026 Matteo Murdaca. Tutti i diritti riservati. All rights reserved.
+
+ITALIANO
+
+1. Titolarità. Il software "Radar Eventi" (codice sorgente, grafica, testi, struttura dei dati,
+   icone e marchio "RADAR") è opera dell'autore ed è protetto dalla legge sul diritto d'autore
+   (L. 22 aprile 1941, n. 633) e dalle norme internazionali applicabili.
+
+2. Cosa è consentito. È consentito visitare e usare il sito pubblicato e le pagine degli eventi
+   come utente finale. Il fatto che il codice sia visibile pubblicamente (ad esempio su GitHub)
+   non concede alcuna licenza d'uso.
+
+3. Cosa non è consentito senza autorizzazione scritta dell'autore:
+   - copiare, riprodurre o scaricare il codice per riutilizzarlo, in tutto o in parte;
+   - modificarlo, tradurlo o creare opere derivate;
+   - distribuirlo, pubblicarlo altrove, venderlo, darlo in licenza o in uso a terzi;
+   - usarlo per offrire servizi a pagamento o gratuiti a terzi;
+   - rimuovere o alterare questa licenza, gli avvisi di copyright o il marchio.
+
+4. Licenze commerciali. Chi desidera usare Radar Eventi per il proprio Comune, associazione,
+   location o attività può richiedere una licenza d'uso o un abbonamento all'autore.
+
+5. Nessuna garanzia. Il software è fornito "così com'è", senza garanzie di alcun tipo. Nei limiti
+   consentiti dalla legge, l'autore non risponde di danni derivanti dall'uso.
+
+6. Componenti di terzi. Alcuni componenti appartengono ai rispettivi titolari e restano soggetti
+   alle loro licenze, elencate più sotto; questa licenza non le modifica.
+
+ENGLISH (summary)
+
+This software is proprietary. You may use the published website as an end user. Public visibility
+of the source code grants no license. Copying, modifying, redistributing, selling, sublicensing or
+using it to provide services to third parties is prohibited without the author's prior written
+permission. Provided "as is", without warranty of any kind.
+
+Contatti per licenze / Licensing contact: tramite il profilo GitHub matteomurdaca-art
+
+------------------------------------------------------------------------------------------
+COMPONENTI DI TERZI / THIRD-PARTY COMPONENTS (caricati dai rispettivi servizi, non inclusi nel codice)
+
+- Leaflet 1.9.4 — BSD 2-Clause License — (c) Volodymyr Agafonkin, CloudMade — https://leafletjs.com
+- QRCode.js 1.0.0 — MIT License — (c) davidshimjs — https://github.com/davidshimjs/qrcodejs
+- Dati e mappe OpenStreetMap — Open Database License (ODbL) — © OpenStreetMap contributors —
+  https://www.openstreetmap.org/copyright
+- Font Sora e Atkinson Hyperlegible — SIL Open Font License 1.1 — tramite Google Fonts
+- Indicazioni stradali e calendario: link a Google Maps e Google Calendar, soggetti ai termini di Google
